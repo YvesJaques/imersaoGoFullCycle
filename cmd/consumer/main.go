@@ -21,3 +21,18 @@ func main() {
 	usecase := usecase.CalculateFinalPrice{OrderRepository: repository}
 	msgChanKafka := make(chan *kafka.Message)
 }
+
+func kafkaWorker(msgChan chan *kafka.Message, uc usecase.CalculateFinalPrice) {
+	for msg := range msgChan {
+		var OrderInputDTO usecase.OrderInputDTO
+		err := json.Unmarshal(msg.Value, &OrderInputDTO)
+		if err != nil {
+			panic(err)
+		}
+		outputDto, err := uc.Execute(OrderInputDTO)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("Kafka has processed order %s\n", outputDto.ID)
+	}
+}
