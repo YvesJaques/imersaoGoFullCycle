@@ -1,4 +1,4 @@
-module github.com/devfullcycle/gotintensivo2
+module github.com/YvesJaques/gointensivo2
 
 go 1.20
 

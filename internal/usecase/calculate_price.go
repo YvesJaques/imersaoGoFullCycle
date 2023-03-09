@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/devfullcycle/gotintensivo2/internal/entity"
+import "github.com/YvesJaques/gointensivo2/internal/entity"
 
 type OrderInputDTO struct {
 	ID    string

@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"testing"
 
-	"github.com/devfullcycle/gotintensivo2/internal/entity"
+	"github.com/YvesJaques/gointensivo2/internal/entity"
 	"github.com/stretchr/testify/suite"
 
 	// sqlite3 driver
