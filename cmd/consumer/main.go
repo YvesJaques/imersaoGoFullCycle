@@ -8,6 +8,7 @@ import (
 	"github.com/YvesJaques/gointensivo2/internal/infra/database"
 	"github.com/YvesJaques/gointensivo2/internal/usecase"
 	"github.com/YvesJaques/gointensivo2/pkg/kafka"
+	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
 )
 
 func main() {
@@ -19,10 +20,10 @@ func main() {
 
 	repository := database.NewOrderRepository(db)
 	usecase := usecase.CalculateFinalPrice{OrderRepository: repository}
-	msgChanKafka := make(chan *kafka.Message)
+	msgChanKafka := make(chan *ckafka.Message)
 }
 
-func kafkaWorker(msgChan chan *kafka.Message, uc usecase.CalculateFinalPrice) {
+func kafkaWorker(msgChan chan *ckafka.Message, uc usecase.CalculateFinalPrice) {
 	for msg := range msgChan {
 		var OrderInputDTO usecase.OrderInputDTO
 		err := json.Unmarshal(msg.Value, &OrderInputDTO)
